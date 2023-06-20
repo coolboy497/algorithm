@@ -1,0 +1,133 @@
+//this指针指向被调用的成员函数所属的对象
+//1.解决名称冲突
+//2.返回对象本身用*this
+
+//空指针可以调用成员函数，但成员函数内不包含对成员属性的访问
+
+//成员函数加const后称这个函数为常函数（const是加在成员函数的后面）
+//常函数内不可以修改成员属性
+//成员属性声明加关键字mutable后，在常函数内依然可以修改（mutable加在申明前面）
+//申明对象前加const称为常对象，常对象只能调用常函数
+
+//全局函数做友元 关键字 friend,就可以访问类中的私有成员(成员函数和成员属性)
+//类做友元
+
+
+//STL的诞生（standard template library 标准模板库）
+为了建立数据结构和算法的一套标准
+STL六大组件：容器、算法、迭代器、仿函数、适配器、空间配置器
+
+string是c++风格的字符串，string本质上是一个类，其内部封装了char*，是一个char*型的容器
+
+//vector数据结构与数组非常相似，被称为单端数组
+vector不同于数组的地方是其可以进行动态扩展（不是在原空间之后续接新空间，而是找更大
+的内存空间，将原数据拷贝到新空间，释放原空间）
+vector的容器迭代器是支持随机访问的迭代器，可以跳跃式访问，比如v.begin()+4
+
+
+vector容器的赋值操作
+（1）= （2）assign（beg,end）将[beg,end)区间中的数据拷贝赋值给本身 assign(n,elem) 将n个elem拷贝赋值给本身
+vector容器的容量和大小
+（1）empty()判断容器是否为空 返回ture/false v.empty()
+（2）capacity()容器的容量
+（3）size()返回容器中的元素个数
+（4）resize(int num)重新指定容器的长度为num，容器变长默认填充，容器变短超出删除
+（5）resize(int num,elem) 用elem值填充容器的新位置
+vector容器的插入和删除
+（1）push_back/pop_back: 尾部插入/删除
+（2）insert(iterator pos,ele): 迭代器指向位置pos插入元素ele
+（3）insert(iterator pos,int count,ele): 迭代器指向位置pos插入count个元素ele
+（4）erase(iterator pos): 删除迭代器指向的元素
+（5）erase(iterator start,iterator end):删除迭代器从start到end之间的元素
+（6）clear():删除容器中的所有元素
+vector容器数据存取
+（1）at(int idx)返回索引idx所指的数据
+（2）[] 返回索引idx所指的数据
+（3）front() 返回容器中第一个数据元素
+（4）back() 返回容器中最后一个数据元素
+vector互换容器
+（1）swap(vec)
+vector预留空间(减少vector在动态扩展容量时的扩展次数)
+（1）reserve(int len) 容器预留len个元素长度，预留位置不初始化，元素不可访问。
+
+
+//deque容器又叫做双端数组，可以对头端进行插入删除操作
+deque与vector区别：
+（1）vector对于头部的插入删除效率低，数据量越大，效率越低
+（2）deque相对而言，对头部的插入删除速度会比vector快
+（3）vector访问元素时的速度会比deque快，这和两者内部实现有关
+deque容器大小操作
+（1）empty()判断容器是否为空 
+（2）size()返回容器中的元素个数
+（3）resize(int num)重新指定容器的长度为num，容器变长默认填充，容器变短超出删除
+（4）resize(int num,elem) 用elem值填充容器的新位置
+deque插入与删除
+（1）push_front(elem)/pop_front()容器头部插入和删除第一个数据
+push_back(ele)/pop_back()容器尾部插入和删除数据
+（2）insert(pos,elem)在pos位置插入一个elem元素的拷贝，返回新数据的位置
+（3）insert(pos,n,elem)在pos位置插入n个elem数据，无返回值
+（4）insert(pos,beg,end)在pos位置插入[beg,end)区间的数据，无返回值 pos都是指迭代器
+（5）erase(beg,end)删除[beg,end)区间的数据，返回下一个数据的位置
+（6）erase(pos)删除pos位置的数据，返回下一个数据的位置
+（7）clear()清空容器的所有数据
+deque数据存取
+（1）at(idx)返回索引idx所指的数据
+（2）[idx]返回索引idx所指的数据
+（3）front()/back()返回容器中的首尾元素
+deque排序
+（1）sort(iterator beg, iterator end)
+
+
+//stack容器，先进后出 栈
+stack构造函数
+（1）stack <T> s;
+（2）stack(const stack &s);拷贝构造函数
+stack数据存取
+（1）push(elem) 向栈顶添加元素
+（2）pop() 从栈顶移除第一个元素
+（3）top() 返回栈顶元素
+stack大小操作
+（1）empty() 判断堆栈是否为空
+（2）size() 返回栈的大小
+
+//Queue容器，先进先出 队列
+Queue构造函数
+（1）Queue <T> q;
+（2）Queue(const Queue &q);拷贝构造函数
+Queue数据存取
+（1）push(elem) 向队尾添加元素
+（2）pop() 从队头移除第一个元素
+（3）back() 返回最后一个元素
+（4）front() 返回第一个元素
+Queue大小操作
+（1）empty() 判断队列是否为空
+（2）size() 返回队列的大小
+
+//list容器 链表(STL中链表是一个双向循环链表)
+优点：可以对任意位置进行元素的快速插入和删除
+缺点：容器遍历速度，没有数组快，占用空间比数组大
+list容器构造函数
+（1）list <int> l
+（2）list <int> l2(l.begin(),l.end())
+（3）list <int> l3(l2)
+（4）list <int> l4(10,10)
+list容器赋值和交换
+（1）assign(beg,end)
+（2）assign(n,elem)
+（3）=
+（4）l1.swap(l2)
+list容器大小操作
+（1）size() 返回容器中元素的个数
+（2）empty() 判断容器是否为空
+（3）resize(num)重新指定容器的长度为num，容器变长默认填充，容器变短超出删除
+（4）resize(num,elem) 用elem值填充容器的新位置
+list容器插入和删除
+（1）push_back(elem)/pop_back() 插入/删除容器中最后一个元素
+（2）push_front(elem)/pop_front() 插入/删除容器中第一个元素
+（3）insert(pos,elem) 在pos位置插入elem元素的拷贝,返回新数据的位置
+（4）insert(pos,n,elem) 在pos位置插入n个elem数据，无返回值
+（5）insert(pos,beg,end) 在pos位置插入[beg,end)区间的数据,无返回值
+（6）clear() 移除容器中的所有数据
+（7）erase(beg,end) 删除[beg,end)区间的数据，返回下一个数据的位置
+（8）erase(pos) 删除pos位置的数据，返回下一个数据的位置
+（9）remove(elem) 删除容器中所有与elem值匹配的元素，这里的elem不是迭代器
