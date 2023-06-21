@@ -146,3 +146,13 @@ l.sort()可以 但sort(l.begin(),l.end())不行
 set/multiset容器属于关联式容器，底层结构使用二叉树实现的
 set不允许容器中有重复的元素
 multiset允许容器中有重复的元素
+set容器大小和交换
+（1）size()返回容器中元素的数目
+（2）empty()返回容器是否为空
+（3）swap(s)交换两个容器
+set容器插入和删除
+（1）insert(elem) 在容器中插入元素
+（2）clear()清除所有元素
+（3）erase(pos) 删除pos迭代器所指的元素，返回下一个元素的迭代器
+（4）erase(beg,end) 删除区间[beg,end）的所有元素,返回下一个元素的迭代器
+（5）erase(elem) 删除容器中值为elem的元素

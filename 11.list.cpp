@@ -89,6 +89,6 @@ int main(){
     l1.sort();
     printList(l1);//10 20 30默认是升序
     l1.sort(compare);
-    printList(l1); // 30 20 10
+    printList(l1);// 30 20 10
     return 0;
 }
