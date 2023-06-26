@@ -142,7 +142,8 @@ list反转和排序
 但其内部会提供一些对应算法
 l.sort()可以 但sort(l.begin(),l.end())不行
 
-//set容器（所有元素都会在插入时自动被排序）
+//set容器（所有元素都会在插入时自动被排序,默认是从小到大
+利用仿函数可以指定set容器的排序规则）
 set/multiset容器属于关联式容器，底层结构使用二叉树实现的
 set不允许容器中有重复的元素
 multiset允许容器中有重复的元素
@@ -156,3 +157,27 @@ set容器插入和删除
 （3）erase(pos) 删除pos迭代器所指的元素，返回下一个元素的迭代器
 （4）erase(beg,end) 删除区间[beg,end）的所有元素,返回下一个元素的迭代器
 （5）erase(elem) 删除容器中值为elem的元素
+
+//pair对组：成对出现的数据，利用对组可以返回两个数据
+（1）pair<type,type> p(value1,value2);
+（2）pair<type,type> p = make_pair(value1,value2)
+
+//map/multimap容器
+map容器中所有元素都成对的，对中第一个元素为key(起索引作用)，第二个元素为value(实值)
+所有元素都会根据元素的键值自动排序
+map/multimap容器属于关联式容器，底层结构使用二叉树实现的
+map/multimap容器允许/不允许容器中有重复key值元素
+map容器构造和赋值
+（1）map<T1,T2> mp        map默认构造函数
+（2）map<const map & map> 拷贝构造函数
+（3）= 赋值
+map容器大小和交换
+（1）size()返回容器中元素的数目
+（2）empty()返回容器是否为空
+（3）swap(s)交换两个容器
+map容器插入和删除
+（1）insert(elem) 在容器中插入元素
+（2）clear() 清除所有元素
+（3）erase(pos) 删除pos迭代器所指的元素，返回下一个元素的迭代器
+（4）erase(beg,end) 删除区间[beg,end)的元素，返回下一个元素的迭代器
+（5）erase(key) 删除容器中值为key的元素
