@@ -27,6 +27,7 @@ bool my_compare(Person &l1,Person &l2){
         return l1.age<l2.age;
     }
 }
+
 int main(){
     list<Person> l;
     Person p1("张三",50,174);
