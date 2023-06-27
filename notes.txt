@@ -181,3 +181,8 @@ map容器插入和删除
 （3）erase(pos) 删除pos迭代器所指的元素，返回下一个元素的迭代器
 （4）erase(beg,end) 删除区间[beg,end)的元素，返回下一个元素的迭代器
 （5）erase(key) 删除容器中值为key的元素
+map容器查找和统计
+（1）find(key) 查找key是否存在，若存在返回该键的元素的迭代器，若不存在，返回map.end()
+（2）count(key) 统计key的元素个数
+map容器排序
+（1）利用仿函数改变排序规则
