@@ -204,7 +204,8 @@ map容器排序
 算术仿函数、关系仿函数、逻辑仿函数
 
 //常用算法
-(1)for_each
+(1)for_each(beg,end,_func)
+开始迭代器、结束迭代器、_func函数或者函数对象
 
 (2)transform(beg1,end1,beg2,func) 
 搬运容器到另一个容器
@@ -219,4 +220,26 @@ beg2:目标容器开始迭代器 func:函数或者函数对象
 
 (5)adjacent_find(begin,end)
 查找相邻重复元素，返回相邻元素的第一个位置的迭代器
+
+(6)binary_search(begin,end,val)有序序列才能用
+查找指定的元素，返回true or false
+
+(7)count(begin,end,value)
+统计value元素的个数
+
+(8)count_if(beg,end,_perd)
+按条件统计元素出现次数
+
+(9)sort(beg,end,_pred)
+对容器内元素进行排序
+
+(10)random_shuffle(beg,end)
+对指定范围内的元素随机调整次序
+
+(11)merge(v1.begin(),v1.end(),v2.begin(),v2.end(),vtarget.begin())
+合并前需要提前给vtarget分配空间 vtarget.resize(v1.size()+v2.size())
+(两个有序序列才能合并，合并后仍有序)容器元素合并，并存储到另一个容器中
+
+(12)reverse(beg,end)
+反转指定范围的元素
 
