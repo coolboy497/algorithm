@@ -9,7 +9,7 @@ int getrightborder(vector<int>& nums, int target){
     int r=nums.size()-1;
     int rightborder = -1;
     while(l<=r){
-        int mid = l+(l+r)/2;//防止溢出
+        int mid = l+((l+r)/2);//防止溢出
         if(nums[mid]>target){
             r=mid-1;
         }
@@ -44,7 +44,7 @@ int getrightborder(vector<int>& nums, int target){
 // };
 int main(){
     int num[6] = {5,7,7,8,8,10};
-    int target = 7;
+    int target = 8;
     vector<int>v;
     for(int i=0;i<sizeof(num)/sizeof(num[0]);i++){
         v.push_back(num[i]);
