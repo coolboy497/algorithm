@@ -44,13 +44,14 @@ public:
                 }
             }
             else{
-                if(i>=0 || j>=0){
+                if(i>=0 || j>=0){//仅当一个出界，返回false；都出界不做处理
                     return false;
                 }
             }
             i--;
             j--;
         }
+        return true;
     }
 };
 int main(){
