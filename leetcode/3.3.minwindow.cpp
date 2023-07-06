@@ -8,54 +8,40 @@ using namespace std;
 class Solution {
 public:
     string minWindow(string s, string t) {
-        int i=0,j=0;
-        // int sublen = s.size()+1;
-        int lens = s.size();
-        int lent = t.size();
-        if(lens < lent){
+        int lens = s.length();
+        int lent = t.length();
+        if(lens<lent||lens==0||lent==0){
             return "";
         }
-        if(lens==lent&&s!=t){
-            return "";
+        map<char,int>ms;
+        map<char,int>mt;
+        for(int i=0;i<lent;i++){
+            mt[t[i]]++;
         }
-        if(lens==lent&&s==t){
-            return s;
-        }
-        if(lent==1){
-            if(s.find(t)!= string::npos)
-            {
-                return t;
+        int left=0,right=0;
+        int num=0;
+        string substr;
+        for(;right<lens;right++){
+            ms[s[right]]++;
+            if(ms[s[right]]<=mt[s[right]]){
+                num++;
             }
-            else{
-                return "";
+            while(ms[s[left]]>mt[s[left]]){
+                ms[s[left]]--;
+                left++;
             }
-        }
-        map <char,int> m;
-        for(i=0;i<lens;i++){
-            // 判断字符s[i]是否在t中
-            if(t.find(s[i]) != string::npos){
-                m[s[i]]++;
-            }
-            while(m.size()==lent){
-                auto it = m.find(s[j]);
-                if(it->second>1){
-                    it->second --;
+            if(num==lent){
+                if(substr.empty()||right-left+1<substr.size()){
+                    substr = s.substr(left,right-left+1);
                 }
-                else if(it->second==1){
-                    break;
-                }
-                j++;
             }
         }
-        if (m.size()==0){
-            return "";
-        }
-        return s.substr(j,i);
+        return substr;
     }
 };
 int main(){
     string s = "abc";
-    string t = "ab";
+    string t = "b";
     Solution s1;
     string substr = s1.minWindow(s,t);
     cout<<substr<<endl;
