@@ -45,33 +45,40 @@ public:
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        if(matrix.empty()){
+            return {};
+        }
         vector <int> seq;
         int rows = matrix.size(); // 获取行数
         int cols = matrix[0].size(); // 获取列数
         int nums = rows*cols;
         int l=0,r=cols-1,t=0,b=rows-1;
         int i;
-        while(nums>1){
+        while(nums>0){
             for(i=l;i<=r;i++){
                 seq.push_back(matrix[t][i]);
                 nums--;
             }
             t++;
+            if (t>b){break;}
             for(i=t;i<=b;i++){
                 seq.push_back(matrix[i][r]);
                 nums--;
             }
             r--;
+            if(l>r){break;}
             for(i=r;i>=l;i--){
                 seq.push_back(matrix[b][i]);
                 nums--;
             }
             b--;
+            if (t>b){break;}
             for(i=b;i>=t;i--){
                 seq.push_back(matrix[i][l]);
                 nums--;
             }
             l++;
+            if(l>r){break;}
         }
         return seq;
     }
