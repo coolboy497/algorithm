@@ -5,7 +5,7 @@
 #include <map>
 #include <cmath>
 using namespace std;
-//给定两个单链表的头节点，找出并返回两个单链表相交的起始节点
+//给定两个单链表的头节点，找出并返回两个单链表相交的起始节点,是比较指针地址
 struct ListNode{
     int val;
     ListNode *next;
@@ -52,10 +52,43 @@ ListNode* reverselist(ListNode* head) {
     }
     return pre;
 }
+int getlen(ListNode *head){
+    ListNode *p = head;
+    int len = 0;
+    while(p){
+        len++;
+        p=p->next;
+    }
+    return len;
+}
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-     
+        if(headA==NULL||headB==NULL){
+            return NULL;
+        }
+        int lenA = getlen(headA);
+        int lenB = getlen(headB);
+        int sub = max(lenA,lenB)-min(lenA,lenB);
+        ListNode*pa = headA;
+        ListNode*pb= headB;
+        if(lenA>lenB){
+            while(sub>0){
+                pa = pa->next;
+                sub--;
+            }
+        }
+        if(lenA<lenB){
+            while(sub>0){
+                pb = pb->next;
+                sub--;
+            }
+        }
+        while(pa&&pb&&pa!=pb){
+            pa = pa->next;
+            pb = pb->next;
+        }
+        return pa;
     }
 };
 int main(){
