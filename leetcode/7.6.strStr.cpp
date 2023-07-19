@@ -43,18 +43,58 @@ using namespace std;
 // };
 
 //KMP算法
+void getnext(int*next,const string &needle){
+    int len = needle.length();
+    next[0]=0;
+    int j=0;
+    for(int i=1;i<len;i++){
+        // if(needle[i]==needle[j]){
+        //     j++;
+        //     // next[i]=j;
+        // }
+        while(j>0&&needle[i]!=needle[j]){
+            j = next[j-1];
+        }
+        if(needle[i]==needle[j]){
+            j++;
+            // next[i]=j;
+        }
+        next[i]=j;
+    }
+}
 class Solution {
 public:
-    int strStr(string haystack, string needle) {
-        
+    int strStr(string haystack, string needle){
+        if(needle.length()==0){
+            return 0;
+        }
+        int next[needle.length()];
+        getnext(next,needle);
+        int j=0;
+        for(int i=0;i<haystack.length();i++){
+            // if(haystack[i]==needle[j]){
+            //     j++;
+            // }
+            // 不相等的情况必须要写到前面
+            while(j>0&&haystack[i]!=needle[j]){
+                j = next[j-1];
+            }
+            if(haystack[i]==needle[j]){
+                j++;
+            }
+            if(j==needle.size()){
+                return i-needle.size()+1;
+            }
+        }
+        return -1;
     }
 };
 void myprint(char c){
     cout<<c<<" ";
 }
 int main(){
-    string s="c";
-    string t="c";
+    string s="aabbaabbaf";
+    string t="aabbaf";
     Solution s1;
     cout<<"字符串s为:"<<"";
     cout<<s<<endl;
