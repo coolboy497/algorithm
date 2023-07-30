@@ -16,7 +16,7 @@ public:
     int evalRPN(vector<string>& tokens) {
        stack<long long>result;
        for(int i=0;i<tokens.size();i++){
-            if(tokens[i]=="+"||tokens[i]=="-"||tokens[i]=="*"||tokens[i]=="÷"||tokens[i]=="%"){
+            if(tokens[i]=="+"||tokens[i]=="-"||tokens[i]=="*"||tokens[i]=="/"||tokens[i]=="%"){
                long long second_number = result.top();
                result.pop();
                long long first_number = result.top();
@@ -24,11 +24,11 @@ public:
                if(tokens[i]=="+")result.push(first_number+second_number);
                else if(tokens[i]=="-")result.push(first_number-second_number);
                else if(tokens[i]=="*")result.push(first_number*second_number);
-               else if(tokens[i]=="÷")result.push(first_number/second_number);
+               else if(tokens[i]=="/")result.push(first_number/second_number);
                else if(tokens[i]=="%")result.push(first_number%second_number);
             }
             else{
-                result.push(stoll(tokens[i]));
+                result.push(atoi(tokens[i].c_str()));
             }
        }
         return result.top();
