@@ -5,61 +5,46 @@
 using namespace std;
 class Solution {
 public:
-    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-        //dp[i,j]表示到达第i,j位置时的不同路径
-        //递推关系:dp[i,j]=dp[i-1,j]+dp[i,j-1] (无障碍物)
-        // 
-        //初始化:dp[0,j]=1;dp[i,0]=1;
-        //遇到障碍物，后面的初始化为0;
-        //遍历顺序：先行后列
-        int m = obstacleGrid.size();
-        int n = obstacleGrid[0].size();
-        vector<vector<int> >dp(m,vector<int>(n,0));
-        for(int j=0;j<n;j++){
-            if(obstacleGrid[0][j]==0){
-                dp[0][j]=1;
-            }
-            else{
-                for(int k=j;k<n;k++){
-                    dp[0][k]=0;
-                }
-                break;
-            }
+    // int backtraverse(vector<int>&nums,int start,int end){
+    //     if(start>end){
+    //       return 0;
+    //     }
+    //     int p1 = nums[start]+backtraverse(nums,start+2,end);
+    //     int p2 = backtraverse(nums,start+1,end);
+    //     return max(p1,p2);
+    // }
+    // start 0~nums.size()-1
+    // end  nums.size()-2~nums.size()-1
+    int dp2(vector<int>&nums,vector<int>&dp){
+        for(int i=nums.size()-2;i>=0;i--){
+            int p1 = nums[i]+dp[i+2];
+            int p2 = dp[i+1];
+            dp[i] = max(p1,p2);
         }
-        for(int i=0;i<m;i++){
-            if(obstacleGrid[i][0]==0){
-                dp[i][0]=1;
-            }
-            else{
-                for(int k=i;k<m;k++){
-                    dp[k][0]=0;
-                }
-                break;
-            }
-        }
-        for(int i=1;i<m;i++){
-            for(int j=1;j<n;j++){
-                if(obstacleGrid[i-1][j]==0&&obstacleGrid[i][j-1]==0){
-                    dp[i][j]=dp[i-1][j]+dp[i][j-1];
-                }
-                else{
-                    if(obstacleGrid[i-1][j]==0){
-                        dp[i][j]=dp[i][j-1];
-                    }
-                    else{
-                        dp[i][j]=dp[i-1][j];
-                    }
-                }
-            }
-        }
-        return dp[m-1][n-1];
+        return dp[0];
+    }
+    int rob(vector<int>& nums) {
+        vector<int>nums1(nums.begin()+1,nums.end());
+        vector<int>nums2(nums.begin()+2,nums.end()-1);
+        vector<int>dp(nums1.size()+1);
+        vector<int>dp1(nums2.size()+1);
+        return max(nums[0]+dp2(nums2,dp1),dp2(nums1,dp));
+
+        // return max(nums[0]+backtraverse(nums,2,nums.size()-2),backtraverse(nums,1,nums.size()-1));
     }
 };
 int main(){
     Solution s1;
     //vector<vector<int>>points = {{1,2},{3,4},{5,6},{7,8}};
     // int s = 332;
-    vector<vector<int>>obstacleGrid = {{1,0}};
-    int a=s1.uniquePathsWithObstacles(obstacleGrid);
+    vector<int>nums{1,2,3,1};
+    int a = s1.rob(nums);
+    // vector<int>dp(nums.size()+1);
+    // vector<int>dp1(nums.size()+1);
+    // int a = nums[0]+s1.dp2(nums,dp,2,nums.size()-2);
+    // int b = s1.dp2(nums,dp1,1,nums.size()-1);
+    // return max(nums[0]+dp2(nums,dp,2,nums.size()-2),dp2(nums,dp1,1,nums.size()-1));
+    // int a=s1.rob(nums);
     cout<<a;
+    // cout<<b;
 }
